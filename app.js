@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const path = require('path');
 
-// Mongoose access
+// Mongo access
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DB_URI, {
   auth: {
@@ -30,7 +30,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
-//Setting up Passport
+// Setting up Passport
 app.use(passport.initialize());
 app.use(passport.session());
 const User = require('./models/user');
@@ -46,41 +46,39 @@ app.use('/css', express.static('assets/css'));
 app.use('/javascript', express.static('assets/javascript'));
 app.use('/images', express.static('assets/images'));
 
-
-// Setup flash notification and defaults
+// Setup flash notifications and defaults
 const flash = require('connect-flash');
 app.use(flash());
 app.use('/', (req, res, next) => {
   // Setting default locals
   res.locals.pageTitle = "Untitled";
 
-    // Passing along flash message
-    res.locals.flash = req.flash();
-    res.locals.formData = req.session.formData || {};
-    req.session.formData = {};
-    console.log(res.locals.flash);
+  // Passing along flash message
+  res.locals.flash = req.flash();
+  res.locals.formData = req.session.formData || {};
+  req.session.formData = {};
   
-    // Authentication helper
-    res.locals.authorized = req.isAuthenticated();
-    if (res.locals.authorized) res.locals.email = req.session.passport.user;
+  // Authentication helper
+  res.locals.authorized = req.isAuthenticated();
+  if (res.locals.authorized) res.locals.email = req.session.passport.user;
 
-    next();
-  });
+  next();
+});
 
-//Our routes
+// Our routes
 const routes = require('./routes.js');
 app.use('/api', routes);
 app.use(express.static("public"));
 
-app.get('/test', (req,res) =>{
-  res.status(200).json({message: 'Hello World'})
-})
+app.get('/test', (req, res) => {
+  res.status(200).json({message: 'Hello World'});
+});
 
 app.use(express.static(path.join(__dirname, 'client/build')));
-app.get('*', (req,res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'))
-})
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
-//Start our server
-const port = process.env.PORT || 4000
+// Start our server
+const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Listening on port ${port}`));

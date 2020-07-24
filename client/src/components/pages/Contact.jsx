@@ -3,10 +3,10 @@ import {Container, Form} from 'react-bootstrap'
 
 function Contact () {
     return (
-                    <Container className="my-5">
-                        <header className="jumbotron">
-                            <h1>Contact Linh</h1>
-                        </header>
+            <Container className="my-5">
+                <header className="jumbotron">
+                    <h1>Contact Linh</h1>
+                </header>
                 <div className="contact1">
                     <div className="container-contact1">
                         <div className="contact1-pic js-tilt" data-tilt>
@@ -19,7 +19,7 @@ function Contact () {
                             Let's send Linh a message
                         </span>
 
-                        < Form.Group className="wrap-input1">
+                        <Form.Group className="wrap-input1">
                         <Form.Control className="input1" type="text" name="name" placeholder="Name" required />
                         <span className="shadow-input1"></span>
                         </Form.Group>
