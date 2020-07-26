@@ -94,7 +94,7 @@ const Edit = function (props) {
               as="select"
               name="status"
               onChange={handleInputChange}
-              defaultValue={inputs.status || 'DRAFT'}
+              value={inputs.status}
             >
               <option value="DRAFT">draft</option>
               <option value="PUBLISHED">published</option>

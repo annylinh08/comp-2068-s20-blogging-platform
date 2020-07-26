@@ -71,11 +71,13 @@ exports.update = async (req, res) => {
     await Blog.validate(attributes);
     await Blog.findByIdAndUpdate(attributes.id, attributes);
 
-    req.flash('success', 'The blog was updated successfully');
-    res.redirect(`/blogs/${req.body.id}`);
+    // req.flash('success', 'The blog was updated successfully');
+    // res.redirect(`/blogs/${req.body.id}`);
+    res.status(200).json({message: "The blog was updated successfully"});
   } catch (error) {
-    req.flash('danger', `There was an error updating this blog: ${error}`);
-    res.redirect(`/blogs/${req.body.id}/edit`);
+    // req.flash('danger', `There was an error updating this blog: ${error}`);
+    // res.redirect(`/blogs/${req.body.id}/edit`);
+    res.status(400).jason({message: "There was an error updating this blog"});
   }
 };
 
