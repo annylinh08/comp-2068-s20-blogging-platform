@@ -70,14 +70,9 @@ exports.update = async (req, res) => {
     const attributes = {user: user._id, ...req.body};
     await Blog.validate(attributes);
     await Blog.findByIdAndUpdate(attributes.id, attributes);
-
-    // req.flash('success', 'The blog was updated successfully');
-    // res.redirect(`/blogs/${req.body.id}`);
     res.status(200).json({message: "The blog was updated successfully"});
   } catch (error) {
-    // req.flash('danger', `There was an error updating this blog: ${error}`);
-    // res.redirect(`/blogs/${req.body.id}/edit`);
-    res.status(400).jason({message: "There was an error updating this blog"});
+    res.status(400).json({message: "There was an error updating this blog"});
   }
 };
 
@@ -86,6 +81,6 @@ exports.delete = async (req, res) => {
     await Blog.deleteOne({_id: req.body.id});
     res.status(200).json({message: "Yay."});
   } catch (error) {
-    res.status(400).jason({message: "There was an error deleting the blog"});
+    res.status(400).json({message: "There was an error deleting the blog"});
   }
 };

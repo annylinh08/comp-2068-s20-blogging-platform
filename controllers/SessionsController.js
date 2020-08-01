@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const passport = require('passport');
 const viewPath = 'sessions';
-const jwt = require('jsonwebtoken');
 
 exports.new = (req, res) => {
     res.render(`${viewPath}/new`, {
